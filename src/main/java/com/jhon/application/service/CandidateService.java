@@ -13,8 +13,12 @@ public class CandidateService {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public List<CandidateEntity> findAllCandidates() {
+    public List<CandidateEntity> getAllCandidates() {
         return candidateRepository.findAll();
+    }
+
+    public CandidateEntity createCandidate(CandidateEntity candidateEntity) {
+        return candidateRepository.save(candidateEntity);
     }
 
 }

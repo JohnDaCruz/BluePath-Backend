@@ -17,9 +17,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf-> csrf.disable())
                 .authorizeRequests((request)-> request
-                                .requestMatchers(HttpMethod.POST,"/hello/**").permitAll()
-                                .anyRequest()
-                                .authenticated());
+                        .requestMatchers(HttpMethod.POST,"/organization/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/candidate/**").permitAll()
+                        .anyRequest()
+                        .authenticated());
         return http.build();
     }
 }

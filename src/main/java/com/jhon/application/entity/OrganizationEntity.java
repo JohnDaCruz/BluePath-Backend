@@ -1,7 +1,6 @@
 package com.jhon.application.entity;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -11,57 +10,66 @@ import java.util.List;
 public class OrganizationEntity {
     @MongoId
     private ObjectId _id;
-    private int organizationId;
     private String organizationName;
     private String organizationEmail;
     private String organizationPassword;
-    private List<JobEntity> organizationTopics;
+    private ObjectId jobsID;
 
-    public OrganizationEntity(int organizationId, String organizationName, String organizationEmail, String organizationPassword, List<JobEntity> organizationTopics) {
-        this.organizationId = organizationId;
+    public OrganizationEntity(
+            ObjectId _id,
+            String organizationName,
+            String organizationEmail,
+            String organizationPassword,
+            ObjectId jobsID
+    ) {
+        this._id = _id;
         this.organizationName = organizationName;
         this.organizationEmail = organizationEmail;
         this.organizationPassword = organizationPassword;
-        this.organizationTopics = organizationTopics;
+        this.jobsID = jobsID;
     }
 
-    public int getorganizationId() {
-        return organizationId;
+    public OrganizationEntity() {
+
     }
 
-    public void setorganizationId(int organizationId) {
-        this.organizationId = organizationId;
+    public ObjectId get_id() {
+        return _id;
     }
 
-    public String getorganizationName() {
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+    }
+
+    public String getOrganizationName() {
         return organizationName;
     }
 
-    public void setorganizationName(String organizationName) {
+    public void setOrganizationName(String organizationName) {
         this.organizationName = organizationName;
     }
 
-    public String getorganizationEmail() {
+    public String getOrganizationEmail() {
         return organizationEmail;
     }
 
-    public void setorganizationEmail(String organizationEmail) {
+    public void setOrganizationEmail(String organizationEmail) {
         this.organizationEmail = organizationEmail;
     }
 
-    public String getorganizationPassword() {
+    public String getOrganizationPassword() {
         return organizationPassword;
     }
 
-    public void setorganizationPassword(String organizationPassword) {
+    public void setOrganizationPassword(String organizationPassword) {
         this.organizationPassword = organizationPassword;
     }
 
-    public List<JobEntity> getorganizationTopics() {
-        return organizationTopics;
+    public ObjectId getJobsID() {
+        return jobsID;
     }
 
-    public void setorganizationTopics(List<JobEntity> organizationTopics) {
-        this.organizationTopics = organizationTopics;
+    public void setJobsID(ObjectId jobsID) {
+        this.jobsID = jobsID;
     }
 }

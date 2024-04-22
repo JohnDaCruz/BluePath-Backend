@@ -1,48 +1,58 @@
 package com.jhon.application.entity;
 
 import com.jhon.application.enums.JobModalities;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Date;
 
-
 @Document(value = "job")
 public class JobEntity {
-    @Id
-    private int idJob;
+    @MongoId
+    private int _id;
     private String jobName;
-    private String localizacao;
-    private JobModalities modalidadeTrabalho;
-    private Long faixaSalarial;
-    private String beneficios;
-    private String areaAtuacao;
-    private boolean vagaAfirmativa;
-    private Date dataPublicacao;
-    private String empresaContratante;
+    private String location;
+    private JobModalities workModality;
+    private Long salaryRange;
+    private String benefits;
+    private String businessArea;
+    private boolean affirmativeVacancy;
+    private Date publicationDate;
+    private String hiringCompany;
     private CandidateEntity[] candidatesInJob;
 
-    public JobEntity(int idJob, String jobName, String localizacao, JobModalities modalidadeTrabalho, Long faixaSalarial, String beneficios, String areaAtuacao, boolean vagaAfirmativa, Date dataPublicacao, String empresaContratante, CandidateEntity[] candidatesInJob) {
-        this.idJob = idJob;
+    public JobEntity(
+            int _id,
+            String jobName,
+            String location,
+            JobModalities workModality,
+            Long salaryRange,
+            String benefits,
+            String businessArea,
+            boolean affirmativeVacancy,
+            Date publicationDate,
+            String hiringCompany,
+            CandidateEntity[] candidatesInJob
+    ) {
+        this._id = _id;
         this.jobName = jobName;
-        this.localizacao = localizacao;
-        this.modalidadeTrabalho = modalidadeTrabalho;
-        this.faixaSalarial = faixaSalarial;
-        this.beneficios = beneficios;
-        this.areaAtuacao = areaAtuacao;
-        this.vagaAfirmativa = vagaAfirmativa;
-        this.dataPublicacao = dataPublicacao;
-        this.empresaContratante = empresaContratante;
+        this.location = location;
+        this.workModality = workModality;
+        this.salaryRange = salaryRange;
+        this.benefits = benefits;
+        this.businessArea = businessArea;
+        this.affirmativeVacancy = affirmativeVacancy;
+        this.publicationDate = publicationDate;
+        this.hiringCompany = hiringCompany;
         this.candidatesInJob = candidatesInJob;
     }
 
-    public int getIdJob() {
-        return idJob;
+    public int get_id() {
+        return _id;
     }
 
-    public void setIdJob(int idJob) {
-        this.idJob = idJob;
+    public void set_id(int _id) {
+        this._id = _id;
     }
 
     public String getJobName() {
@@ -53,68 +63,68 @@ public class JobEntity {
         this.jobName = jobName;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public JobModalities getModalidadeTrabalho() {
-        return modalidadeTrabalho;
+    public JobModalities getWorkModality() {
+        return workModality;
     }
 
-    public void setModalidadeTrabalho(JobModalities modalidadeTrabalho) {
-        this.modalidadeTrabalho = modalidadeTrabalho;
+    public void setWorkModality(JobModalities workModality) {
+        this.workModality = workModality;
     }
 
-    public Long getFaixaSalarial() {
-        return faixaSalarial;
+    public Long getSalaryRange() {
+        return salaryRange;
     }
 
-    public void setFaixaSalarial(Long faixaSalarial) {
-        this.faixaSalarial = faixaSalarial;
+    public void setSalaryRange(Long salaryRange) {
+        this.salaryRange = salaryRange;
     }
 
-    public String getBeneficios() {
-        return beneficios;
+    public String getBenefits() {
+        return benefits;
     }
 
-    public void setBeneficios(String beneficios) {
-        this.beneficios = beneficios;
+    public void setBenefits(String benefits) {
+        this.benefits = benefits;
     }
 
-    public String getAreaAtuacao() {
-        return areaAtuacao;
+    public String getBusinessArea() {
+        return businessArea;
     }
 
-    public void setAreaAtuacao(String areaAtuacao) {
-        this.areaAtuacao = areaAtuacao;
+    public void setBusinessArea(String businessArea) {
+        this.businessArea = businessArea;
     }
 
-    public boolean isVagaAfirmativa() {
-        return vagaAfirmativa;
+    public boolean isAffirmativeVacancy() {
+        return affirmativeVacancy;
     }
 
-    public void setVagaAfirmativa(boolean vagaAfirmativa) {
-        this.vagaAfirmativa = vagaAfirmativa;
+    public void setAffirmativeVacancy(boolean affirmativeVacancy) {
+        this.affirmativeVacancy = affirmativeVacancy;
     }
 
-    public Date getDataPublicacao() {
-        return dataPublicacao;
+    public Date getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setDataPublicacao(Date dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
-    public String getEmpresaContratante() {
-        return empresaContratante;
+    public String getHiringCompany() {
+        return hiringCompany;
     }
 
-    public void setEmpresaContratante(String empresaContratante) {
-        this.empresaContratante = empresaContratante;
+    public void setHiringCompany(String hiringCompany) {
+        this.hiringCompany = hiringCompany;
     }
 
     public CandidateEntity[] getCandidatesInJob() {

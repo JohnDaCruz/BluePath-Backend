@@ -1,5 +1,6 @@
 package com.jhon.application.entity;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -8,60 +9,58 @@ import java.util.List;
 
 @Document(collection = "candidate")
 public class CandidateEntity {
-    @Id
-    private int organizationId;
-    private String organizationName;
-    private String organizationEmail;
-    private String organizationPassword;
-    private List<JobEntity> organizationTopics;
+    @MongoId
+    private ObjectId _id;
+    private String candidateName;
+    private String candidateEmail;
+    private String candidatePassword;
+    private List<ObjectId> candidateJobs;
 
-    public CandidateEntity(int organizationId, String organizationName, String organizationEmail, String organizationPassword, List<JobEntity> organizationTopics) {
-        this.organizationId = organizationId;
-        this.organizationName = organizationName;
-        this.organizationEmail = organizationEmail;
-        this.organizationPassword = organizationPassword;
-        this.organizationTopics = organizationTopics;
+    public CandidateEntity(ObjectId _id, String candidateName, String candidateEmail, String candidatePassword, List<ObjectId> candidateJobs) {
+        this._id = _id;
+        this.candidateName = candidateName;
+        this.candidateEmail = candidateEmail;
+        this.candidatePassword = candidatePassword;
+        this.candidateJobs = candidateJobs;
     }
 
-    public int getOrganizationId() {
-        return organizationId;
+    public ObjectId get_id() {
+        return _id;
     }
 
-    public void setOrganizationId(int organizationId) {
-        this.organizationId = organizationId;
+    public void set_id(ObjectId _id) {
+        this._id = _id;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public String getCandidateName() {
+        return candidateName;
     }
 
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
+    public void setCandidateName(String candidateName) {
+        this.candidateName = candidateName;
     }
 
-    public String getOrganizationEmail() {
-        return organizationEmail;
+    public String getCandidateEmail() {
+        return candidateEmail;
     }
 
-    public void setOrganizationEmail(String organizationEmail) {
-        this.organizationEmail = organizationEmail;
+    public void setCandidateEmail(String candidateEmail) {
+        this.candidateEmail = candidateEmail;
     }
 
-    public String getOrganizationPassword() {
-        return organizationPassword;
+    public String getCandidatePassword() {
+        return candidatePassword;
     }
 
-    public void setOrganizationPassword(String organizationPassword) {
-        this.organizationPassword = organizationPassword;
+    public void setCandidatePassword(String candidatePassword) {
+        this.candidatePassword = candidatePassword;
     }
 
-    public List<JobEntity> getOrganizationTopics() {
-        return organizationTopics;
+    public List<ObjectId> getCandidateJobs() {
+        return candidateJobs;
     }
 
-    public void setOrganizationTopics(List<JobEntity> organizationTopics) {
-        this.organizationTopics = organizationTopics;
+    public void setCandidateJobs(List<ObjectId> candidateJobs) {
+        this.candidateJobs = candidateJobs;
     }
-
-
 }
