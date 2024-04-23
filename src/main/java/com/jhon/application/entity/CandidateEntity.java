@@ -3,18 +3,22 @@ package com.jhon.application.entity;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 
 @Document(collection = "candidate")
 public class CandidateEntity {
-    @MongoId
+    @MongoId(FieldType.DOUBLE)
     private ObjectId _id;
     private String candidateName;
     private String candidateEmail;
     private String candidatePassword;
     private List<ObjectId> candidateJobs;
+
+    public CandidateEntity() {
+    }
 
     public CandidateEntity(ObjectId _id, String candidateName, String candidateEmail, String candidatePassword, List<ObjectId> candidateJobs) {
         this._id = _id;

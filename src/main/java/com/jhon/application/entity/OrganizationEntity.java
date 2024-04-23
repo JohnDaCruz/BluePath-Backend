@@ -1,6 +1,7 @@
 package com.jhon.application.entity;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -13,20 +14,14 @@ public class OrganizationEntity {
     private String organizationName;
     private String organizationEmail;
     private String organizationPassword;
-    private ObjectId jobsID;
+    private List<JobEntity> jobsInOrganization;
 
-    public OrganizationEntity(
-            ObjectId _id,
-            String organizationName,
-            String organizationEmail,
-            String organizationPassword,
-            ObjectId jobsID
-    ) {
+    public OrganizationEntity(ObjectId _id, String organizationName, String organizationEmail, String organizationPassword, List<JobEntity> jobsInOrganization) {
         this._id = _id;
         this.organizationName = organizationName;
         this.organizationEmail = organizationEmail;
         this.organizationPassword = organizationPassword;
-        this.jobsID = jobsID;
+        this.jobsInOrganization = jobsInOrganization;
     }
 
     public OrganizationEntity() {
@@ -65,11 +60,11 @@ public class OrganizationEntity {
         this.organizationPassword = organizationPassword;
     }
 
-    public ObjectId getJobsID() {
-        return jobsID;
+    public List<JobEntity> getJobsInOrganization() {
+        return jobsInOrganization;
     }
 
-    public void setJobsID(ObjectId jobsID) {
-        this.jobsID = jobsID;
+    public void setJobsInOrganization(List<JobEntity> jobsInOrganization) {
+        this.jobsInOrganization = jobsInOrganization;
     }
 }

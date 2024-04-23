@@ -9,5 +9,5 @@ public record OrganizationDTO(
         @NonNull String organizationName,
         String organizationEmail,
         String organizationPassword,
-        List<JobEntity> organizationTopics
+        List<JobEntity> jobsInOrganization
 ) {}

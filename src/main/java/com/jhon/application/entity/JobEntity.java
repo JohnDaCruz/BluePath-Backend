@@ -1,39 +1,30 @@
 package com.jhon.application.entity;
 
-import com.jhon.application.enums.JobModalities;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
-
 import java.util.Date;
+import java.util.List;
 
 @Document(value = "job")
 public class JobEntity {
-    @MongoId
+    @Id
     private int _id;
     private String jobName;
     private String location;
-    private JobModalities workModality;
+    private String workModality;
     private Long salaryRange;
     private String benefits;
     private String businessArea;
     private boolean affirmativeVacancy;
     private Date publicationDate;
     private String hiringCompany;
-    private CandidateEntity[] candidatesInJob;
+    private List<ObjectId> candidatesInJob;
 
-    public JobEntity(
-            int _id,
-            String jobName,
-            String location,
-            JobModalities workModality,
-            Long salaryRange,
-            String benefits,
-            String businessArea,
-            boolean affirmativeVacancy,
-            Date publicationDate,
-            String hiringCompany,
-            CandidateEntity[] candidatesInJob
-    ) {
+    public JobEntity() {
+    }
+
+    public JobEntity(int _id, String jobName, String location, String workModality, Long salaryRange, String benefits, String businessArea, boolean affirmativeVacancy, Date publicationDate, String hiringCompany, List<ObjectId> candidatesInJob) {
         this._id = _id;
         this.jobName = jobName;
         this.location = location;
@@ -71,11 +62,11 @@ public class JobEntity {
         this.location = location;
     }
 
-    public JobModalities getWorkModality() {
+    public String getWorkModality() {
         return workModality;
     }
 
-    public void setWorkModality(JobModalities workModality) {
+    public void setWorkModality(String workModality) {
         this.workModality = workModality;
     }
 
@@ -127,11 +118,11 @@ public class JobEntity {
         this.hiringCompany = hiringCompany;
     }
 
-    public CandidateEntity[] getCandidatesInJob() {
+    public List<ObjectId> getCandidatesInJob() {
         return candidatesInJob;
     }
 
-    public void setCandidatesInJob(CandidateEntity[] candidatesInJob) {
+    public void setCandidatesInJob(List<ObjectId> candidatesInJob) {
         this.candidatesInJob = candidatesInJob;
     }
 }
