@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,13 +29,19 @@ public class OrganizationService {
 
     public OrganizationEntity addJobToOrganization(String organizationName, JobEntity job) {
         OrganizationEntity organization = organizationRepository.findByOrganizationName(organizationName);
-        if(organization == null) {
-            return null;
-        }
+        if(organization == null) {return null;}
+
         List<JobEntity> jobs = organization.getJobsInOrganization();
         jobs.add(job);
         organization.setJobsInOrganization(jobs);
 
         return organizationRepository.save(organization);
+    }
+
+    public List<JobEntity> jobAppliedReturn(){
+        //RETORNA O OBJETO SUCCESS
+        OrganizationEntity organization = organizationRepository.findByOrganizationName("Horizon");
+        var teste = Collections.singletonList(organization.getJobsInOrganization().get(1));
+        return teste;
     }
 }

@@ -1,38 +1,36 @@
 package com.jhon.application.entity;
 
-import org.bson.types.ObjectId;
+import com.jhon.application.dtos.JobDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 
 @Document(collection = "candidate")
 public class CandidateEntity {
-    @MongoId(FieldType.DOUBLE)
-    private ObjectId _id;
+    @Id
+    private String _id;
     private String candidateName;
     private String candidateEmail;
     private String candidatePassword;
-    private List<ObjectId> candidateJobs;
+    private List<JobDTO>  jobsApplied;
 
     public CandidateEntity() {
     }
 
-    public CandidateEntity(ObjectId _id, String candidateName, String candidateEmail, String candidatePassword, List<ObjectId> candidateJobs) {
+    public CandidateEntity(String _id, String candidateName, String candidateEmail, String candidatePassword, List<JobDTO>  jobsApplied) {
         this._id = _id;
         this.candidateName = candidateName;
         this.candidateEmail = candidateEmail;
         this.candidatePassword = candidatePassword;
-        this.candidateJobs = candidateJobs;
+        this.jobsApplied = jobsApplied;
     }
 
-    public ObjectId get_id() {
+    public String get_id() {
         return _id;
     }
 
-    public void set_id(ObjectId _id) {
+    public void set_id(String _id) {
         this._id = _id;
     }
 
@@ -60,11 +58,11 @@ public class CandidateEntity {
         this.candidatePassword = candidatePassword;
     }
 
-    public List<ObjectId> getCandidateJobs() {
-        return candidateJobs;
+    public List<JobDTO>  getJobsApplied() {
+        return jobsApplied;
     }
 
-    public void setCandidateJobs(List<ObjectId> candidateJobs) {
-        this.candidateJobs = candidateJobs;
+    public void setJobsApplied(List<JobDTO> jobsApplied) {
+        this.jobsApplied = jobsApplied;
     }
 }

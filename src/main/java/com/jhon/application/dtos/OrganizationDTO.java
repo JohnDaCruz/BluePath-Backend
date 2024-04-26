@@ -6,8 +6,6 @@ import com.mongodb.lang.NonNull;
 import java.util.List;
 
 public record OrganizationDTO(
-        @NonNull String organizationName,
-        String organizationEmail,
-        String organizationPassword,
+        String organizationName,
         List<JobEntity> jobsInOrganization
 ) {}

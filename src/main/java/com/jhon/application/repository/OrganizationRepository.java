@@ -5,7 +5,6 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface OrganizationRepository extends MongoRepository<OrganizationEntity, ObjectId> {
+public interface OrganizationRepository extends MongoRepository<OrganizationEntity, String> {
     OrganizationEntity findByOrganizationName(String name);
-
 }

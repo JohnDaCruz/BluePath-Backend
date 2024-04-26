@@ -1,9 +1,11 @@
 package com.jhon.application.controller;
 
+import com.jhon.application.dtos.JobDTO;
 import com.jhon.application.dtos.OrganizationDTO;
 import com.jhon.application.entity.JobEntity;
 import com.jhon.application.entity.OrganizationEntity;
 import com.jhon.application.entity.UserEntitySB;
+import com.jhon.application.repository.OrganizationRepository;
 import com.jhon.application.service.OrganizationService;
 import org.bson.Document;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +22,7 @@ public class OrganizationController {
 
     @Autowired
     private OrganizationService organizationService;
+
 
     @PostMapping("/hello")
     public ResponseEntity testRouter(@RequestBody UserEntitySB body) {
@@ -48,10 +51,18 @@ public class OrganizationController {
     @PatchMapping("/create-vacancy/{organization}")
     public ResponseEntity createJob(
             @PathVariable String organization,
-            @RequestBody JobEntity job
+            @RequestBody @Validated JobDTO jobDTO
     ) {
-        OrganizationEntity orgFound = organizationService.addJobToOrganization(organization, job);
+        var newJobEntity = new JobEntity();
+        BeanUtils.copyProperties(jobDTO, newJobEntity);
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Job add in your Organization -> " + orgFound.toString());
+        OrganizationEntity jobAdd = organizationService.addJobToOrganization(organization, newJobEntity);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Job add in your Organization -> " + jobAdd.toString());
+    }
+
+    @GetMapping("/teste")
+    public List<JobEntity> rotaTeste(){
+        return organizationService.jobAppliedReturn();
     }
 }
