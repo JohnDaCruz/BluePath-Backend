@@ -13,7 +13,7 @@ public class CandidateEntity {
     private String candidateName;
     private String candidateEmail;
     private String candidatePassword;
-    private List<JobDTO>  jobsApplied;
+    private List<JobDTO> jobsApplied;
 
     public CandidateEntity() {
     }

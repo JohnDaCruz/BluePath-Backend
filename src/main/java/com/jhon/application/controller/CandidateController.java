@@ -1,11 +1,7 @@
 package com.jhon.application.controller;
 
 import com.jhon.application.dtos.CandidateDTO;
-import com.jhon.application.dtos.JobDTO;
-import com.jhon.application.dtos.OrganizationDTO;
 import com.jhon.application.entity.CandidateEntity;
-import com.jhon.application.entity.JobEntity;
-import com.jhon.application.entity.OrganizationEntity;
 import com.jhon.application.service.CandidateService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +33,13 @@ public class CandidateController {
     @PatchMapping("/apply-for-job/{candidateId}/{jobName}")
     public ResponseEntity applyForJob(
             @PathVariable String candidateId,
-            @PathVariable String jobName,
-            @RequestBody OrganizationDTO organizationDTO
+            @PathVariable String jobName
     ) {
         //MANIPULAR DUAS COLLECTIONS COM UMA REQUISIÇÃO
         //MODIFICAR COLLECTION CANDIDATE ADICIOANDO JOB
         //VERIFICAR SE O JOB PERTENCE A ALGUMA ORGANIZATION
         //PERSISTIR NA COLLECTION DA ORGANIZATION TAMBÉM - REQ. CANDIDATE ENTITY & JOB ENTITY
-        var newJobForCandidate = candidateService.jobApply(organizationDTO, candidateId, jobName);
-        return ResponseEntity.status(HttpStatus.OK).body(newJobForCandidate);
+        //var newJobForCandidate = candidateService.jobApply(candidateId, jobName);
+        return ResponseEntity.status(HttpStatus.OK).body("teste");
     }
 }

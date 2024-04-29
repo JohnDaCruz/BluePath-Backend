@@ -9,6 +9,8 @@ import java.util.List;
 
 @Document(value = "job")
 public class JobEntity {
+    private String _id;
+    private String hiringCompany;
     private String jobName;
     private String location;
     private String workModality;
@@ -17,14 +19,14 @@ public class JobEntity {
     private String businessArea;
     private boolean affirmativeVacancy;
     private Date publicationDate;
-    private String hiringCompany;
     @DBRef
-    private List<String> candidatesInJob;
+    private CandidateEntity candidatesInJob;
 
     public JobEntity() {
     }
 
     public JobEntity(
+            String _id,
             String jobName,
             String location,
             String workModality,
@@ -34,8 +36,9 @@ public class JobEntity {
             boolean affirmativeVacancy,
             Date publicationDate,
             String hiringCompany,
-            List<String> candidatesInJob
+            CandidateEntity candidatesInJob
     ) {
+        this._id = _id;
         this.jobName = jobName;
         this.location = location;
         this.workModality = workModality;
@@ -46,6 +49,14 @@ public class JobEntity {
         this.publicationDate = publicationDate;
         this.hiringCompany = hiringCompany;
         this.candidatesInJob = candidatesInJob;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getJobName() {
@@ -120,11 +131,11 @@ public class JobEntity {
         this.hiringCompany = hiringCompany;
     }
 
-    public List<String>getCandidatesInJob() {
+    public CandidateEntity getCandidatesInJob() {
         return candidatesInJob;
     }
 
-    public void setCandidatesInJob(List<String> candidatesInJob) {
+    public void setCandidatesInJob(CandidateEntity candidatesInJob) {
         this.candidatesInJob = candidatesInJob;
     }
 }
