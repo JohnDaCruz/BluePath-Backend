@@ -24,19 +24,24 @@ public class CompanyService{
 
     public CompanyEntity createCompany(CompanyEntity organization) {return companyRepository.save(organization);}
 
-    public CompanyEntity addJobToCompany(String companyId , JobEntity job) {
+    public CompanyEntity addJobToCompany(String companyId, JobEntity job) {
         var companyOptional = companyRepository.findById(companyId);
-        if(companyOptional.isPresent()) {
+        if (companyOptional.isPresent()) {
             var company = companyOptional.get();
             var companyName = company.getCompanyName();
-
 
             job.setHiringCompany(companyName);
             jobRepository.save(job);
 
-            List<JobEntity> jobCompanyConverter = new ArrayList<>();
+            List<JobEntity> jobCompanyConverter = company.getJobsInCompany();
+
+            if (jobCompanyConverter == null) {
+                jobCompanyConverter = new ArrayList<>();
+            }
+
             jobCompanyConverter.add(job);
             company.setJobsInCompany(jobCompanyConverter);
+
             return companyRepository.save(company);
         }
         return null;

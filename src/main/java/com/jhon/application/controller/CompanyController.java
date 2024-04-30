@@ -37,7 +37,7 @@ public class CompanyController{
         return ResponseEntity.status(HttpStatus.CREATED).body(companyCreated.getCompanyName() + " criado com sucesso!");
     }
 
-    @PostMapping("/create-vacancy/{companyId}")
+    @PatchMapping("/create-vacancy/{companyId}")
     public ResponseEntity createJob(@RequestBody JobDTO jobDTO, @PathVariable String companyId ){
         var newJob = new JobEntity();
         BeanUtils.copyProperties(jobDTO, newJob);
