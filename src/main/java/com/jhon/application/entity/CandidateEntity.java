@@ -1,6 +1,5 @@
 package com.jhon.application.entity;
 
-import com.jhon.application.dtos.JobDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,12 +12,12 @@ public class CandidateEntity {
     private String candidateName;
     private String candidateEmail;
     private String candidatePassword;
-    private List<JobDTO> jobsApplied;
+    private List<String> jobsApplied;
 
     public CandidateEntity() {
     }
 
-    public CandidateEntity(String _id, String candidateName, String candidateEmail, String candidatePassword, List<JobDTO>  jobsApplied) {
+    public CandidateEntity(String _id, String candidateName, String candidateEmail, String candidatePassword, List<String>  jobsApplied) {
         this._id = _id;
         this.candidateName = candidateName;
         this.candidateEmail = candidateEmail;
@@ -26,43 +25,25 @@ public class CandidateEntity {
         this.jobsApplied = jobsApplied;
     }
 
-    public String get_id() {
-        return _id;
-    }
+    public String get_id() {return _id;}
 
-    public void set_id(String _id) {
-        this._id = _id;
-    }
+    public void set_id(String _id) {this._id = _id;}
 
-    public String getCandidateName() {
-        return candidateName;
-    }
+    public String getCandidateName() {return candidateName;}
 
-    public void setCandidateName(String candidateName) {
-        this.candidateName = candidateName;
-    }
+    public void setCandidateName(String candidateName) {this.candidateName = candidateName;}
 
-    public String getCandidateEmail() {
-        return candidateEmail;
-    }
+    public String getCandidateEmail() {return candidateEmail;}
 
-    public void setCandidateEmail(String candidateEmail) {
-        this.candidateEmail = candidateEmail;
-    }
+    public void setCandidateEmail(String candidateEmail) {this.candidateEmail = candidateEmail;}
 
-    public String getCandidatePassword() {
-        return candidatePassword;
-    }
+    public String getCandidatePassword() {return candidatePassword;}
 
-    public void setCandidatePassword(String candidatePassword) {
-        this.candidatePassword = candidatePassword;
-    }
+    public void setCandidatePassword(String candidatePassword) {this.candidatePassword = candidatePassword;}
 
-    public List<JobDTO>  getJobsApplied() {
-        return jobsApplied;
-    }
+    public List<String> getJobsApplied() {return jobsApplied;}
 
-    public void setJobsApplied(List<JobDTO> jobsApplied) {
+    public void setJobsApplied(List<String> jobsApplied) {
         this.jobsApplied = jobsApplied;
     }
 }

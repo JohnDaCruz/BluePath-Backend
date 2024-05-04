@@ -1,11 +1,16 @@
 package com.jhon.application.service;
 
+import com.jhon.application.dtos.JobDTO;
 import com.jhon.application.entity.CandidateEntity;
+import com.jhon.application.entity.JobEntity;
 import com.jhon.application.repository.CandidateRepository;
-import com.jhon.application.repository.CompanyRepository;
+import com.jhon.application.repository.JobRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +20,7 @@ public class CandidateService {
     private CandidateRepository candidateRepository;
 
     @Autowired
-    private CompanyRepository organizationRepository;
+    private JobRepository jobRepository;
 
     public List<CandidateEntity> getAllCandidates() {
         return candidateRepository.findAll();
@@ -25,31 +30,31 @@ public class CandidateService {
         return candidateRepository.save(candidateEntity);
     }
 
-    /*public String jobApply(String candidateId, String jobName) {
-        CandidateEntity candidate = candidateRepository.findByCandidateId(candidateId);
-        CompanyEntity organization = organizationRepository.findByCompanyName(jobName);
+    public CandidateEntity jobApply(String candidateId, String jobId) {
+        var candidateOptional = candidateRepository.findById(candidateId);
+        var jobOptional = jobRepository.findById(jobId);
 
-        //INSERINDO O ID DO CANDIDATE NO JOB DA ORGANIZATION
-        List<JobEntity> jobs = organization.getJobsInOrganization();
-        for (JobEntity job : jobs) {
-            if (job.getJobName().equals(jobName)) {
-                List<String> candidatesIdForJob = new ArrayList<>();
-                candidatesIdForJob.add(candidateId);
+        if(jobOptional.isPresent() && candidateOptional.isPresent()){
+            var job = jobOptional.get();
+            var candidate = candidateOptional.get();
 
-                job.setCandidatesInJob(candidatesIdForJob);
-                break;
-            }
+            List<CandidateEntity> candidatesInJobList = job.getCandidatesInJob();
+            List<String> candidateJobsAppliedList = candidate.getJobsApplied();
+
+            if (candidateJobsAppliedList == null) candidateJobsAppliedList = new ArrayList<>();
+            if(candidatesInJobList == null) candidatesInJobList = new ArrayList<>();
+
+            candidatesInJobList.add(candidate);
+            candidateJobsAppliedList.add(job.get_id());
+
+            candidate.setJobsApplied(candidateJobsAppliedList);
+            job.setCandidatesInJob(candidatesInJobList);
+
+            candidateRepository.save(candidate);
+            jobRepository.save(job);
+            return candidate;
+
         }
-
-        //INSERINDO O JOB DA ORGANIZATION EM CANDIDATE
-        var jobsForCandidate = candidate.getJobsApplied();
-        for(JobDTO jobDTO : jobsForCandidate) {
-            var organizationJobForCandidate = organization.getJobsInOrganization().equals(jobName);
-            if(organizationJobForCandidate){
-                candidate.getJobsApplied().add(jobDTO);
-            }
-        }
-
-        return "OK";
-    }*/
+        return null;
+    }
 }

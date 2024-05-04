@@ -22,13 +22,13 @@ public class CompanyController{
     private CompanyRepository companyRepository;
 
     @GetMapping("/get-companies")
-    public ResponseEntity getAll() {
+    public ResponseEntity<Object> getAll() {
         List<CompanyEntity> listOrg = companyService.allCompanies();
         return ResponseEntity.status(HttpStatus.FOUND).body(listOrg.toArray());
     }
 
     @PostMapping("/create-company")
-    public ResponseEntity createUser(@RequestBody CompanyEntity companyEntity) {
+    public ResponseEntity<Object> createUser(@RequestBody CompanyEntity companyEntity) {
         var newOrgEntity = new CompanyEntity();
         BeanUtils.copyProperties(companyEntity, newOrgEntity);
 
@@ -38,7 +38,7 @@ public class CompanyController{
     }
 
     @PatchMapping("/create-vacancy/{companyId}")
-    public ResponseEntity createJob(@RequestBody JobDTO jobDTO, @PathVariable String companyId ){
+    public ResponseEntity<Object> createJob(@RequestBody JobDTO jobDTO, @PathVariable String companyId ){
         var newJob = new JobEntity();
         BeanUtils.copyProperties(jobDTO, newJob);
 
@@ -48,7 +48,7 @@ public class CompanyController{
     }
 
     @GetMapping("/teste/{companyId}")
-    public ResponseEntity rotaTeste(@PathVariable String companyId){
+    public ResponseEntity<Object> rotaTeste(@PathVariable String companyId){
         var companyExist = companyRepository.findById(companyId);
         if(companyExist.isPresent()){return ResponseEntity.status(HttpStatus.OK).body(companyExist.get());}
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found!");

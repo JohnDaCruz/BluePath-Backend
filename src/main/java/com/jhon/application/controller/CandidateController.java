@@ -17,29 +17,25 @@ public class CandidateController {
     private CandidateService candidateService;
 
     @GetMapping("/all-candidates")
-    public ResponseEntity AllCandidates() {
+    public ResponseEntity<Object> AllCandidates() {
         var allCandidates = candidateService.getAllCandidates();
         return ResponseEntity.status(HttpStatus.OK).body(allCandidates);
     }
 
     @PostMapping("/create-candidate")
-    public ResponseEntity createCandidate(@RequestBody CandidateDTO candidateDTO) {
+    public ResponseEntity<Object> createCandidate(@RequestBody CandidateDTO candidateDTO) {
         var newCandidate = new CandidateEntity();
         BeanUtils.copyProperties(candidateDTO, newCandidate);
+
         var userCreated = candidateService.createCandidate(newCandidate);
+
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado: " + userCreated);
     }
 
-    @PatchMapping("/apply-for-job/{candidateId}/{jobName}")
-    public ResponseEntity applyForJob(
-            @PathVariable String candidateId,
-            @PathVariable String jobName
-    ) {
-        //MANIPULAR DUAS COLLECTIONS COM UMA REQUISIÇÃO
-        //MODIFICAR COLLECTION CANDIDATE ADICIOANDO JOB
-        //VERIFICAR SE O JOB PERTENCE A ALGUMA ORGANIZATION
-        //PERSISTIR NA COLLECTION DA ORGANIZATION TAMBÉM - REQ. CANDIDATE ENTITY & JOB ENTITY
-        //var newJobForCandidate = candidateService.jobApply(candidateId, jobName);
-        return ResponseEntity.status(HttpStatus.OK).body("teste");
+    @PatchMapping("/apply-for-job/{jobId}/{candidateId}")
+    public ResponseEntity<Object> applyForJob(@PathVariable String candidateId, @PathVariable String jobId) {
+        var jobApply = candidateService.jobApply(candidateId, jobId);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Você aplicou para uma vaga!\n" + jobApply );
     }
 }

@@ -1,5 +1,6 @@
 package com.jhon.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Document(value = "job")
 public class JobEntity {
+    @Id
     private String _id;
     private String hiringCompany;
     private String jobName;
@@ -20,7 +22,7 @@ public class JobEntity {
     private boolean affirmativeVacancy;
     private Date publicationDate;
     @DBRef
-    private CandidateEntity candidatesInJob;
+    private List<CandidateEntity> candidatesInJob;
 
     public JobEntity() {
     }
@@ -36,7 +38,7 @@ public class JobEntity {
             boolean affirmativeVacancy,
             Date publicationDate,
             String hiringCompany,
-            CandidateEntity candidatesInJob
+            List<CandidateEntity> candidatesInJob
     ) {
         this._id = _id;
         this.jobName = jobName;
@@ -131,11 +133,9 @@ public class JobEntity {
         this.hiringCompany = hiringCompany;
     }
 
-    public CandidateEntity getCandidatesInJob() {
-        return candidatesInJob;
-    }
+    public List<CandidateEntity> getCandidatesInJob() {return candidatesInJob;}
 
-    public void setCandidatesInJob(CandidateEntity candidatesInJob) {
+    public void setCandidatesInJob(List<CandidateEntity> candidatesInJob) {
         this.candidatesInJob = candidatesInJob;
     }
 }

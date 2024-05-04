@@ -19,6 +19,7 @@ public class WebSecurityConfig {
                 .authorizeRequests((request)-> request
                         .requestMatchers("/company/**").permitAll()
                         .requestMatchers("/candidate/**").permitAll()
+                        .requestMatchers("/job/**").permitAll()
                         .anyRequest()
                         .authenticated());
         return http.build();
